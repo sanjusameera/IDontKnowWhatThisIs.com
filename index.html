@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website</title>
+  <link rel = "stylesheet" href = "style.css">
+  <style>
+    .error{
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top elements -->
+  <div class="header">
+    <!-- Navigation Bar -->
+    <div class="navbar">
+      <ul type = "none">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Sign Up</a></li>
+      </ul>
+    </div>
+    <!-- Name of the Website -->
+    <div class="logo">
+      <h1>IDontKnowWhatThisIs.com</h1>
+    </div>
+  </div>
+
+  <div class="big">
+    <div class="content">
+      <form>
+        <div>
+          <label class="info" for="name">Name</label>
+          <input type="text" id="name" placeholder="Enter name">
+          <div class = "error"></div>
+        </div>
+
+        <div>
+          <label class="info" for="phone">Phone</label>
+          <input type="number" id="phone" placeholder="Enter Number">
+          <div class = "error"></div>
+        </div>
+
+        <div>
+          <label class="info" for="email">EMail</label>
+        <input type="email" id="email" placeholder="Enter Email">
+        <div class = "error"></div>
+        </div>
+
+        <div>
+          <label class="info"><strong>Travel</strong></label><br />
+
+          <input name = "travel"  value="flight" type="checkbox"  id="flight">
+          <label class="check" for="flight"> Flight</label>
+
+          <input name = "travel" value="Bus" type="checkbox" id="bus">
+          <label class="check" for="bus"> Bus</label>
+
+          <input name = "travel" type="checkbox" value="Train" id="train">
+          <label class="check" for="train"> Train</label>
+          <div class="error"></div>
+        </div>
+
+        <div>
+          <button type="submit" class = "btn" onclick="submitdata(event)">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div> 
+
+  <img src="pikachu.gif" alt="pikachu">
+
+  <script>
+    function submitdata(event){
+  event.preventDefault();
+
+  // NAME
+  let name = document.getElementById("name");
+  console.log(name.value);
+  let finalName = name.value.trim();
+  if (finalName === ''){
+    setError(name, "Name is empty");
+  } else {
+    setSuccess(name);
+  }
+
+  // PHONE
+  let phone = document.getElementById("phone");
+  console.log(phone.value);
+  let finalPhone = phone.value.trim();
+  if (finalPhone === ''){
+    setError(phone, "Phone is empty");
+  } else {
+    setSuccess(phone);
+  }
+
+  // EMAIL
+  let email = document.getElementById("email");
+  let finalEmail = email.value.trim();
+  console.log(email.value);
+  if (finalEmail === ''){
+    setError(email, "Email is empty");
+  } else {
+    setSuccess(email);
+  }
+
+  // TRAVEL OPTIONS
+  let travel =document.getElementsByName("travel");
+  console.log(travel);
+  
+  let selectedTravel = [];
+  for (let val of travel){
+    if (val.checked){
+      selectedTravel.push(val.value); // or val.value if you set it
+    }
+  }
+  console.log("Selected Travel: ", selectedTravel.join());
+
+  let checks= selectedTravel.join();
+  console.log(checks);
+  
+  if (checks ===""){
+    setError(travel[0], "Travel is empty");
+  } else {
+    setSuccess(travel[0]);
+  }
+
+
+  // Validation helper functions
+  
+}
+
+function setError(element, msg){
+    let parent = element.parentElement;
+    let errorDiv = parent.querySelector(".error");
+    errorDiv.innerText = msg;
+  }
+
+  function setSuccess(element){
+    let parent = element.parentElement;
+    let errorDiv = parent.querySelector(".error");
+    errorDiv.innerText = '';
+  }
+
+  </script>
+</body>
+</html>
